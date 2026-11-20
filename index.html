@@ -1,164 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Windows Web OS - Student Project</title>
+    <meta charset="UTF-8">
+    <title>Aethel OS - Futuristic Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="desktop-icons">
-        <div class="icon-item" onclick="openMyPC()">
-            <div class="icon-pic">💻</div>
-            <div class="icon-label">This PC</div>
-        </div>
-
-        <div class="icon-item" onclick="openCalc()">
-            <div class="icon-pic">🧮</div>
-            <div class="icon-label">Calculator</div>
-        </div>
-
-        <div class="icon-item" onclick="openNotepad()">
-            <div class="icon-pic">📝</div>
-            <div class="icon-label">Notepad</div>
-        </div>
-
-        <div class="icon-item" onclick="openCalendar()">
-            <div class="icon-pic">📅</div>
-            <div class="icon-label">Calendar</div>
-        </div>
-
-        <div class="icon-item" onclick="openRecycleBin()">
-            <div class="icon-pic">🗑️</div>
-            <div class="icon-label">Recycle Bin</div>
-        </div>
+    <div class="hud-header">
+        <h1>AETHEL OS v1.0</h1>
+        <div id="live-clock">00:00:00</div>
     </div>
 
-    <div id="myPcWindow" class="win-box" style="top: 60px; left: 140px; width: 420px;">
-        <div class="title-bar" id="myPcHeader">
-            <span>💻 This PC</span>
-            <button class="close-btn" onclick="closeMyPC()">X</button>
-        </div>
-        <div class="win-content">
-            <p><b>Devices and drives (2)</b></p>
-            <div class="drive-box">
-                <div>💽 Local Disk (C:)</div>
-                <div class="bar-bg"><div class="bar-fill" style="width: 70%;"></div></div>
-                <small>140 GB free of 500 GB</small>
-            </div>
-            <div class="drive-box">
-                <div>💽 USB Drive (D:)</div>
-                <div class="bar-bg"><div class="bar-fill" style="width: 20%;"></div></div>
-                <small>25 GB free of 32 GB</small>
-            </div>
-        </div>
-    </div>
-
-    <div id="calcWindow" class="win-box" style="top: 100px; left: 220px; width: 240px;">
-        <div class="title-bar" id="calcHeader">
-            <span>🧮 Calculator</span>
-            <button class="close-btn" onclick="closeCalc()">X</button>
-        </div>
-        <div class="win-content" style="background: #f3f3f3;">
-            <input type="text" id="calcScreen" readonly value="0">
-            <div class="calc-buttons">
+    <div class="main-container">
+        <!-- Calculator Widget -->
+        <div class="widget">
+            <h3>Calculator</h3>
+            <input type="text" id="calc-display" readonly value="0">
+            <div class="calc-grid">
                 <button onclick="clearCalc()">C</button>
-                <button onclick="addCalc('/')">/</button>
-                <button onclick="addCalc('*')">*</button>
-                <button onclick="backCalc()">←</button>
-                
-                <button onclick="addCalc('7')">7</button>
-                <button onclick="addCalc('8')">8</button>
-                <button onclick="addCalc('9')">9</button>
-                <button onclick="addCalc('-')">-</button>
-                
-                <button onclick="addCalc('4')">4</button>
-                <button onclick="addCalc('5')">5</button>
-                <button onclick="addCalc('6')">6</button>
-                <button onclick="addCalc('+')">+</button>
-                
-                <button onclick="addCalc('1')">1</button>
-                <button onclick="addCalc('2')">2</button>
-                <button onclick="addCalc('3')">3</button>
-                <button onclick="doMath()" style="background: #0078d7; color: white;">=</button>
-                
-                <button onclick="addCalc('0')" style="grid-column: span 2;">0</button>
-                <button onclick="addCalc('.')">.</button>
+                <button onclick="appendCalc('/')">/</button>
+                <button onclick="appendCalc('*')">*</button>
+                <button onclick="appendCalc('-')">-</button>
+                <button onclick="appendCalc('7')">7</button>
+                <button onclick="appendCalc('8')">8</button>
+                <button onclick="appendCalc('9')">9</button>
+                <button onclick="appendCalc('+')">+</button>
+                <button onclick="appendCalc('4')">4</button>
+                <button onclick="appendCalc('5')">5</button>
+                <button onclick="appendCalc('6')">6</button>
+                <button onclick="calculateResult()" class="span-two">=</button>
+                <button onclick="appendCalc('1')">1</button>
+                <button onclick="appendCalc('2')">2</button>
+                <button onclick="appendCalc('3')">3</button>
+                <button onclick="appendCalc('0')">0</button>
             </div>
         </div>
-    </div>
 
-    <div id="noteWindow" class="win-box" style="top: 130px; left: 300px; width: 360px;">
-        <div class="title-bar" id="noteHeader">
-            <span>📝 Untitled - Notepad</span>
-            <button class="close-btn" onclick="closeNotepad()">X</button>
-        </div>
-        <div class="menu-strip">
-            <span onclick="saveNote()">File (Save)</span>
-            <span onclick="clearNote()">Edit (Clear)</span>
-        </div>
-        <textarea id="noteText" rows="12" placeholder="Type something..."></textarea>
-    </div>
-
-    <div id="calWindow" class="win-box" style="top: 90px; left: 480px; width: 290px;">
-        <div class="title-bar" id="calHeader">
-            <span>📅 Calendar</span>
-            <button class="close-btn" onclick="closeCalendar()">X</button>
-        </div>
-        <div class="win-content">
-            <h4 id="calHeaderTitle" style="margin: 0 0 10px 0; text-align: center;">Month</h4>
-            <table class="cal-table" id="calGrid">
-                <tr>
-                    <th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th>
-                </tr>
-            </table>
+        <!-- Notes Widget -->
+        <div class="widget">
+            <h3>Quick Notes</h3>
+            <textarea id="notes-area" placeholder="Type notes here..."></textarea>
+            <button onclick="saveNotes()">Save Notes</button>
+            <span id="save-status"></span>
         </div>
     </div>
 
-    <div id="binWindow" class="win-box" style="top: 180px; left: 350px; width: 300px;">
-        <div class="title-bar" id="binHeader">
-            <span>🗑️ Recycle Bin</span>
-            <button class="close-btn" onclick="closeRecycleBin()">X</button>
-        </div>
-        <div class="win-content">
-            <p style="color: gray; text-align: center; margin-top: 30px;">This folder is empty.</p>
-        </div>
-    </div>
-
-    <div id="startMenu" class="start-menu">
-        <div class="start-sidebar">
-            <div onclick="alert('User: Admin')">👤</div>
-            <div onclick="location.reload()">🔄</div>
-        </div>
-        <div class="start-apps">
-            <p style="font-size: 12px; color: #ccc; margin-top: 0;">Pinned Apps</p>
-            <div class="start-item" onclick="openMyPC()">💻 This PC</div>
-            <div class="start-item" onclick="openCalc()">🧮 Calculator</div>
-            <div class="start-item" onclick="openNotepad()">📝 Notepad</div>
-            <div class="start-item" onclick="openCalendar()">📅 Calendar</div>
-            <hr style="border-color: #444;">
-            <p style="font-size: 12px; color: #ccc;">Wallpapers</p>
-            <div class="start-item" onclick="setWallpaper('linear-gradient(135deg, #0078d7, #002050)')">🟦 Windows Blue</div>
-            <div class="start-item" onclick="setWallpaper('linear-gradient(135deg, #1f1c2c, #928dab)')">🟪 Night Mode</div>
-            <div class="start-item" onclick="setWallpaper('linear-gradient(135deg, #134e5e, #71b280)')">🟩 Nature Green</div>
-        </div>
-    </div>
-
-    <div class="taskbar">
-        <div class="task-left">
-            <button class="win-btn" onclick="toggleStart()">⊞ Start</button>
-            <input type="text" class="search-bar" placeholder="Type here to search" onkeyup="searchApps(this.value)">
-            <button class="pinned-btn" onclick="openMyPC()">💻</button>
-            <button class="pinned-btn" onclick="openCalc()">🧮</button>
-            <button class="pinned-btn" onclick="openNotepad()">📝</button>
-        </div>
-        <div class="task-right">
-            <span>🔊</span>
-            <span>📶</span>
-            <div class="clock-area">
-                <div id="timeBox">12:00 PM</div>
-                <div id="dateBox">1/1/2026</div>
-            </div>
-        </div>
+    <!-- Floating Dock -->
+    <div class="floating-dock">
+        <div class="dock-icon" title="Dashboard">🌌</div>
+        <div class="dock-icon" title="Calculator">🧮</div>
+        <div class="dock-icon" title="Notes">📝</div>
     </div>
 
     <script src="script.js"></script>
