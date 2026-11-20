@@ -66,3 +66,5 @@ This project is open source and available under the MIT License.
 ---
 
 <FollowUp label="Want help adding a background wallpaper switcher or a calendar widget to your Mango Mini OS?" query="Help me add a wallpaper switcher feature to the Mango Mini OS project."/>
+
+<img width="1917" height="965" alt="banner 2" src="https://github.com/user-attachments/assets/5a6dd06f-79e8-44b1-9f16-7c0dab12adfc" />
